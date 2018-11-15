@@ -9,6 +9,8 @@ const app = express();
 const shopRoutes = require('./routes/shop');
 const adminRoutes = require('./routes/admin');
 
+// For Serving Files Statically (eg public folder): 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use((req, res, next) => {
