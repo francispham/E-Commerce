@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+const shopRoutes = require('./routes/shop');
+const adminRoutes = require('./routes/admin');
+
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use((req, res, next) => {
@@ -10,19 +13,12 @@ app.use((req, res, next) => {
     next(); // Allows the request to continue to the next middleware in line
 });
 
-app.use('/add-product',(req, res, next) => {
-    res.send(
-        '<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></input></form>'
-        );
-});
+// The order of this 2 app.use will matter if using router.use() in shop.js
+app.use(adminRoutes);
+app.use(shopRoutes);
 
-app.use('/product',(req, res, next) => {
-    console.log(req.body);
-    res.redirect('/');
-});
-
-app.use('/',(req, res, next) => {
-    res.send('<h1>Hello From Express!</h1>');
-});
+app.use((req, res, next) => {
+    res.status(404).send('<h1>Page Not Found</h1>')
+})
 
 app.listen(3000);
