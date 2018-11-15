@@ -20,5 +20,8 @@
   "homepage": "https://github.com/phongpt1989/BasicNode#readme",
   "devDependencies": {
     "nodemon": "^1.18.6"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
   }
 }
