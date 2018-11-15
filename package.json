@@ -1,0 +1,24 @@
+{
+  "name": "nodebasic",
+  "version": "1.0.0",
+  "description": "NodeJS Web Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start-server": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phongpt1989/BasicNode.git"
+  },
+  "author": "Francis Pham",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/phongpt1989/BasicNode/issues"
+  },
+  "homepage": "https://github.com/phongpt1989/BasicNode#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.6"
+  }
+}
