@@ -1,13 +1,13 @@
 const express = require('express');
 
+const path = require('path');
+
 const router = express.Router();
 
 // Because using app.use('/admin', adminRoutes) in app.js. These 2 routes will be come:
 // /admin/add-product => GET
 router.get('/add-product', (req, res, next) => {
-    res.send(
-        '<form action="/admin/product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></input></form>'
-        );
+    res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'));
     });
     
 // /admin/add-product => POST
