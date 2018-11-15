@@ -32,10 +32,22 @@ const requestHandler = (req, res) => {
     }
     res.setHeader('Context-Type', 'text/html');
     res.write('<html>');
-    res.write('<header><title>My Node Page</title></header>');
+    res.write('<head><title>My Node Page</title></head>');
     res.write('<body><h1>Hello from my node server</h1></body>');
     res.write('</html>');
     res.end();
 };
 
-module.exports = requestHandler;
+// module.exports = requestHandler;
+
+// For Multiple exports:
+module.exports = {
+    handler: requestHandler,
+    someText: 'Some hard coded text'
+};
+
+// module.exports.handler = requestHandler;
+// module.exports.someText = 'Some text';
+
+// exports.handler = requestHandler;
+// exports.someText = 'Some hard coded text';
