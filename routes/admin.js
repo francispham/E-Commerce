@@ -13,7 +13,7 @@ router.get('/add-product', (req, res, next) => {
     
 // /admin/add-product => POST
 // Using "post" for "use" will get into this route accidentally:
-router.post('/product', (req, res, next) => {
+router.post('/add-product', (req, res, next) => {
     console.log(req.body);
     res.redirect('/');
 });
