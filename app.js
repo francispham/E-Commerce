@@ -7,7 +7,7 @@ const rootDir = require('./util/path');
 const app = express();
 
 const shopRoutes = require('./routes/shop');
-const adminRoutes = require('./routes/admin');
+const adminData = require('./routes/admin');
 
 // For Serving Files Statically (eg public folder): 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 // The order of this 2 app.use will matter if using router.use() in shop.js
-app.use('/admin', adminRoutes);
+app.use('/admin', adminData.routes);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
