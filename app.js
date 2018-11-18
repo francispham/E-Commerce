@@ -1,12 +1,26 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const expressHbs = require('express-handlebars');
 
 const path = require('path');
 const rootDir = require('./util/path');
 
 const app = express();
 
-app.set('view engine', 'pug');
+app.engine(
+    'hbs', 
+    expressHbs({
+        layoutsDir: 'views/layouts/', 
+        defaultLayout: 'main-layout',
+        extname: 'hbs'
+    })
+    );
+
+// Implement Handlebars:
+app.set('view engine', 'hbs');
+
+// Implement Pug
+// app.set('view engine', 'pug');
 app.set('views', 'views');
 
 const shopRoutes = require('./routes/shop');
