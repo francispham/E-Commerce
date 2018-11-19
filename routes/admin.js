@@ -1,13 +1,20 @@
 const express = require('express');
 
 const path = require('path');
-const rootDir = require('../util/path');
+
+// Add Controllers:
+const productsController = require('../controllers/products');
+// const rootDir = require('../util/path');
+// const products = []; 
 
 const router = express.Router();
 
-const products = [];
 
 // Because using app.use('/admin', adminRoutes) in app.js. These 2 routes will be come:
+router.get('/add-product', productsController.getAddProduct);
+router.post('/add-product', productsController.postAddProduct);
+
+/* When (req,res, next) => () got moved to product.js:
 // /admin/add-product => GET
 router.get('/add-product', (req, res, next) => {
     // res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
@@ -20,9 +27,9 @@ router.get('/add-product', (req, res, next) => {
         activeAddProduct: true
     });
 });
-    
 // /admin/add-product => POST
 // Using "post" for "use" will get into this route accidentally:
+
 router.post('/add-product', (req, res, next) => {
     // console.log(req.body);
     products.push({ title: req.body.title });
@@ -31,3 +38,6 @@ router.post('/add-product', (req, res, next) => {
 
 exports.routes = router;
 exports.products = products;
+*/
+
+exports.routes = router;
