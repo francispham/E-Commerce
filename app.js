@@ -7,6 +7,12 @@ const rootDir = require('./util/path');
 
 const app = express();
 
+
+// Implement Ejs:
+app.set('view engine', 'ejs');
+
+/* 
+// Implement Handlebars:
 app.engine(
     'hbs', 
     expressHbs({
@@ -14,13 +20,13 @@ app.engine(
         defaultLayout: 'main-layout',
         extname: 'hbs'
     })
-    );
-
-// Implement Handlebars:
+);
 app.set('view engine', 'hbs');
 
 // Implement Pug
-// app.set('view engine', 'pug');
+app.set('view engine', 'pug');
+*/
+
 app.set('views', 'views');
 
 const shopRoutes = require('./routes/shop');
