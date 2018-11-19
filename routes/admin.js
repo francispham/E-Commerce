@@ -1,5 +1,4 @@
 const express = require('express');
-
 const path = require('path');
 
 // Add Controllers:
@@ -40,4 +39,4 @@ exports.routes = router;
 exports.products = products;
 */
 
-exports.routes = router;
+module.exports = router;

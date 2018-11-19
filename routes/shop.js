@@ -1,11 +1,15 @@
 const express = require('express');
 const path = require('path');
 
-const rootDir = require('../util/path');
-const adminData = require('./admin');
+// Add Controller:
+const productsController = require('../controllers/products');
+// const rootDir = require('../util/path');
+// const adminData = require('./admin');
 
 const router = express.Router();
 
+router.get('/', productsController.getProducts);
+/* When (req,res, next) => () got moved to product.js:
 router.get('/', (req, res, next) => {
     console.log('shop.js', adminData.products);
     const products = adminData.products;
@@ -22,5 +26,5 @@ router.get('/', (req, res, next) => {
         productCSS: true
     });
 });
-
+*/
 module.exports = router;
