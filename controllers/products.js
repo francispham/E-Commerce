@@ -1,4 +1,6 @@
-const products = [];
+// When Add models:
+// const products = [];
+const Product = require('../models/product');
 
 // For Render add-product.ejs:
 exports.getAddProduct = (req, res, next) => {
@@ -13,7 +15,10 @@ exports.getAddProduct = (req, res, next) => {
 
 // For Post New Product:
 exports.postAddProduct = (req, res, next) => {
-    products.push({ title: req.body.title });
+    // Got moved to models:
+    // products.push({ title: req.body.title });
+    const product = new Product(req.body.title);
+    product.save();
     res.redirect('/');
 };
 
@@ -22,6 +27,7 @@ exports.getProducts = (req, res, next) => {
     /* We don't need this because of 1st code line:
     const products = adminData.products;
     */
+   const products = Product.fetchAll(); //When Add models
     res.render('shop', {
         prods: products,
         pageTitle: 'Shop',
