@@ -26,8 +26,8 @@ exports.postAddProduct = (req, res, next) => {
 exports.getProducts = (req, res, next) => {
     /* We don't need this because of 1st code line:
     const products = adminData.products;
-    */
-   const products = Product.fetchAll(); //When Add models
+    //When Add models
+    const products = Product.fetchAll(); 
     res.render('shop', {
         prods: products,
         pageTitle: 'Shop',
@@ -35,5 +35,17 @@ exports.getProducts = (req, res, next) => {
         hasProducts: products.length > 0,
         activeShop: true,
         productCSS: true
+    });
+    */
+    //Fetching Data from File:
+    Product.fetchAll(products => {
+        res.render('shop', {
+            prods: products,
+            pageTitle: 'Shop',
+            path: '/',
+            hasProducts: products.length > 0,
+            activeShop: true,
+            productCSS: true
+        });
     });
 };
