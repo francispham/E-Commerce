@@ -3,11 +3,43 @@
 const fs = require('fs');
 const path = require('path');
 
+// Helper Functions for Refactoring: 
+const p = path.join(
+    path.dirname(process.mainModule.filename),
+    'data',
+    'products.json'
+);
+
+const getProductsFromFile = cb => {
+    fs.readFile(p, (err, fileContent) => {
+        if (err) {
+            return cb([]);
+        } else {
+            cb(JSON.parse(fileContent));
+        }
+    });
+};
+
 module.exports = class Product {
     constructor(t) {
         this.title = t;
     }
-
+    
+    // After Refactoring:
+    save() {
+        getProductsFromFile(products => {
+            products.push(this);
+            fs.writeFile(p, JSON.stringify(products), err => {
+                console.log(err);
+            });
+        });
+    }
+ 
+    static fetchAll(cb) {
+        getProductsFromFile(cb);
+    }
+ };
+    /*
     save() {
         // Add path for Storing Data in Files
         // products.push(this);
@@ -16,6 +48,7 @@ module.exports = class Product {
             'data', 
             'products.json'
         );
+
         fs.readFile(p, (err, fileContent) => {
             console.log(err);
             let products = [];
@@ -28,23 +61,25 @@ module.exports = class Product {
             });
         });
     }
-    /*
+    
+    // static fetchAll() {
+    //      return products;
+    // }
+    
     // For Fetching data from File: 
-    static fetchAll() {
-        return products;
+    static fetchAll(cb) {
+        const p = path.join(
+            path.dirname(process.mainModule.filename),
+            'data',
+            'products.json'
+            );
+        fs.readFile(p, (err, fileContent) => {
+            if (err) {
+                cb([]);
+            }
+            cb(JSON.parse(fileContent));
+        });
     }
-    */
-   static fetchAll(cb) {
-       const p = path.join(
-           path.dirname(process.mainModule.filename),
-           'data',
-           'products.json'
-       );
-       fs.readFile(p, (err, fileContent) => {
-           if (err) {
-               cb([]);
-           }
-           cb(JSON.parse(fileContent));
-       });
-   }
 };
+    */
+    
