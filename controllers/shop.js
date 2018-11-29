@@ -1,7 +1,7 @@
 // When Add models:
 // const products = [];
 const Product = require('../models/product');
-
+const Cart = require ('../models/cart');
 // For Render shop.ejs page:
 exports.getProducts = (req, res, next) => {
     /* We don't need this because of 1st code line:
@@ -63,7 +63,10 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
     const prodId = req.body.productId;
-    console.log(prodId);
+    // console.log(prodId);
+    Product.findById(prodId, (product) => {
+        Cart.addProduct(prodId, product.price);
+    });
     res.redirect('/cart');
 }
 
