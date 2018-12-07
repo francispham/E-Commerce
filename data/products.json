@@ -1,13 +1,1 @@
-[{
-    "id": "0.21005319346140117",
-    "title": "Officia praesentium dignissimos explicabo Esse mollitia exercitation praesentium est consequatur Nemo consectetur",
-    "imageUrl": "https://icon2.kisspng.com/20180329/xbe/kisspng-t-shirt-unicorn-desktop-wallpaper-dab-mobile-phone-unicorn-5abd227ae898d0.2545509615223445709527.jpg",
-    "price": "867",
-    "description": "Laborum quam sunt sed vel tenetur porro necessitatibus et dolores tempore quidem non excepteur doloremque quis sed in"
-}, {
-    "id": "0.21005319346140117",
-    "title": "Test",
-    "imageUrl": "Test",
-    "price": "119",
-    "description": "Test"
-}]
+[{"id":"123245","title":"A Book","imageUrl":"https://www.publicdomainpictures.net/pictures/10000/velka/1-1210009435EGmE.jpg","description":"This is an awesome book!","price":"19"}]
