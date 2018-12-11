@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 // Add Error Controller:
 const errorController = require('./controllers/error');
 
+// Add MySQL Database:
+const db = require('./util/database');
+
 const path = require('path');
 const rootDir = require('./util/path');
 
@@ -36,6 +39,9 @@ app.set('views', 'views');
 // const adminData = require('./routes/admin');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+
+// Use MySQL Database:
+db.execute('SELECT * FROM products');
 
 // For Serving Files Statically (eg public folder): 
 app.use(express.static(path.join(__dirname, 'public')));
