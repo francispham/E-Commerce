@@ -40,7 +40,7 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
-// Use MySQL Database:
+/* Testing Database Connection:
 db.execute('SELECT * FROM products')
     .then(result => {
         console.log(result);
@@ -48,6 +48,7 @@ db.execute('SELECT * FROM products')
     .catch(err => {
         console.log(err);
     });
+*/
 
 // For Serving Files Statically (eg public folder): 
 app.use(express.static(path.join(__dirname, 'public')));
