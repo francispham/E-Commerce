@@ -42,6 +42,8 @@ exports.getProducts = (req, res, next) => {
 exports.getProduct = (req, res, next) => {
     const prodId = req.params.productId;
     // console.log(prodId);
+    /*
+    // Fetching single Data by Id from File:
     Product.findById(prodId, product => {
         // console.log(product);
         res.render('shop/product-detail', {
@@ -51,6 +53,17 @@ exports.getProduct = (req, res, next) => {
         });
     });
     // res.redirect('/');
+    */
+    //Fetching single Data by Id in Database:
+    Product.findById(prodId)
+        .then(([product]) => {
+            res.render('shop/product-detail', {
+                product: product[0],
+                pageTitle: product.title,
+                path: '/products'
+            });
+        })
+        .catch(err => console.log(err))    
 };
 
 exports.getIndex = (req, res, next) => {
