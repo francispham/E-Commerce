@@ -16,7 +16,6 @@ exports.getProducts = (req, res, next) => {
         activeShop: true,
         productCSS: true
     });
-    */
     //Fetching Data from File:
     Product.fetchAll(products => {
         res.render('shop/product-list', {
@@ -28,6 +27,16 @@ exports.getProducts = (req, res, next) => {
             productCSS: true
         });
     });
+    */
+    Product.fetchAll()
+        .then(([rows, fieldData]) => {
+            res.render('shop/product-list', {
+                prods: rows,
+                pageTitle: 'All Products',
+                path: '/products'
+            });
+        })
+        .catch(err => console.log(err));
 };
 
 exports.getProduct = (req, res, next) => {
