@@ -18,8 +18,12 @@ exports.postAddProduct = (req, res, next) => {
     // Got moved to models:
     // products.push({ title: req.body.title });
     const product = new Product(null, title, imageUrl, price, description);
-    product.save();
-    res.redirect('/');
+    product
+        .save()
+        .then(() => {
+            res.redirect('/');
+        })
+        .catch(err => console.log(err));
 };
 
 exports.getEditProduct = (req, res, next) => {
