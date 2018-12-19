@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 const errorController = require('./controllers/error');
 
 // Add MySQL Database:
-const db = require('./util/database');
+// const db = require('./util/database'); //Before Sequelize
+const sequelize = require('./util/database');
 
 const path = require('path');
 const rootDir = require('./util/path');
@@ -16,7 +17,6 @@ const app = express();
 
 // Implement Ejs:
 app.set('view engine', 'ejs');
-
 /* 
 // Implement Handlebars:
 app.engine(
@@ -32,13 +32,14 @@ app.set('view engine', 'hbs');
 // Implement Pug
 app.set('view engine', 'pug');
 */
-
 app.set('views', 'views');
+
 
 // Add Controller:
 // const adminData = require('./routes/admin');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+
 
 /* Testing Database Connection:
 db.execute('SELECT * FROM products')
@@ -50,21 +51,23 @@ db.execute('SELECT * FROM products')
     });
 */
 
+
 // For Serving Files Statically (eg public folder): 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: false}));
+
 
 app.use((req, res, next) => {
     console.log('This always runs!');
     next(); // Allows the request to continue to the next middleware in line
 });
-
 // The order of this 2 app.use will matter if using router.use() in shop.js
 // app.use('/admin', adminData.routes);
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
-/* Got moved to error.js :
+
+/* Got moved to error.js:
 app.use((req, res, next) => {
     // res.status(404).sendFile(path.join(rootDir, 'views', '404.html'));
     res.status(404).render('404', {pageTitle: "Page Not Found!"});
@@ -72,4 +75,12 @@ app.use((req, res, next) => {
 */
 app.use(errorController.get404);
 
-app.listen(3000);
+sequelize
+    .sync()
+    .then(result => {
+        console.log(result);
+        app.listen(3000);
+    })
+    .catch(err => {
+        console.log(err);
+    })
