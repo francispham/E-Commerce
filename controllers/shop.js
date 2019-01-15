@@ -2,6 +2,7 @@
 // const products = [];
 const Product = require('../models/product');
 const Cart = require ('../models/cart');
+
 // For Render shop.ejs page:
 exports.getProducts = (req, res, next) => {
     /* We don't need this because of 1st code line:
@@ -28,6 +29,7 @@ exports.getProducts = (req, res, next) => {
         });
     });
     */
+   /* Before Sequelize
     Product.fetchAll()
         .then(([rows, fieldData]) => {
             res.render('shop/product-list', {
@@ -37,6 +39,18 @@ exports.getProducts = (req, res, next) => {
             });
         })
         .catch(err => console.log(err));
+    */
+    Product.findAll()
+        .then(products => {
+            res.render('shop/product-list', {
+                prods: products,
+                pageTitle: 'All Products',
+                path: '/products'
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
 };
 
 exports.getProduct = (req, res, next) => {
@@ -76,6 +90,7 @@ exports.getIndex = (req, res, next) => {
         });
     });
     */
+   /* Before Sequelize:
     Product.fetchAll()
         .then(([rows, fieldData]) => {
             res.render('shop/index', {
@@ -85,6 +100,18 @@ exports.getIndex = (req, res, next) => {
             });
         })
         .catch(err => console.log(err));
+    */
+   Product.findAll()
+        .then(products => {
+            res.render('shop/index', {
+                prods: products,
+                pageTitle: 'Shop',
+                path: '/'
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
 };
 
 exports.getCart = (req, res, next) => {
