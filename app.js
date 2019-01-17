@@ -12,6 +12,10 @@ const sequelize = require('./util/database');
 const path = require('path');
 const rootDir = require('./util/path');
 
+// Add Models:
+const Product = require('./models/product');
+const User = require('./models/user');
+
 const app = express();
 
 
@@ -75,8 +79,12 @@ app.use((req, res, next) => {
 */
 app.use(errorController.get404);
 
+// Use Models to define Relationship:
+Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
+User.hasMany(Product);
+
 sequelize
-    .sync()
+    .sync({ force: true }) // 'force' will reset the database with new relationship. 
     .then(result => {
         console.log(result);
         app.listen(3000);
