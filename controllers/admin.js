@@ -27,6 +27,8 @@ exports.postAddProduct = (req, res, next) => {
     })
     .catch(err => console.log(err));
     */
+
+    /* Before Creating User Model:
     Product.create({
         title: title,
         price: price,
@@ -41,6 +43,20 @@ exports.postAddProduct = (req, res, next) => {
         .catch(err => {
             console.log(err);
         });
+    */
+    req.user.createProduct({
+        title: title,
+        price: price,
+        imageUrl: imageUrl,
+        description: description
+    })
+    .then(result =>{
+        console.log('CREATED PRODUCT');
+        res.redirect('/admin/products');
+    })
+    .catch(err => {
+        console.log(err);
+    });     
 };
 
 // For Load Edit Product Page:

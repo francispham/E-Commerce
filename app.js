@@ -70,7 +70,7 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
     User.findById(1)
         .then(user => {
-            req.user = user;
+            req.user = user; //This will include .createProduct() method from Sequelize and will be used in admin.js
             next();
         })
         .catch(err => console.log(err));
