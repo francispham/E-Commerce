@@ -65,6 +65,17 @@ app.use((req, res, next) => {
     console.log('This always runs!');
     next(); // Allows the request to continue to the next middleware in line
 });
+
+// Add Middleware for Retrieving User:
+app.use((req, res, next) => {
+    User.findById(1)
+        .then(user => {
+            req.user = user;
+            next();
+        })
+        .catch(err => console.log(err));
+});
+
 // The order of this 2 app.use will matter if using router.use() in shop.js
 // app.use('/admin', adminData.routes);
 app.use('/admin', adminRoutes);
@@ -84,9 +95,26 @@ Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
 User.hasMany(Product);
 
 sequelize
-    .sync({ force: true }) // 'force' will reset the database with new relationship. 
+    /* Before Adding Dummy User:
+    // 'force' will reset the database with new relationship. 
+    .sync({ force: true }) 
     .then(result => {
         console.log(result);
+        app.listen(3000);
+    })
+    */
+    .sync()
+    .then(result => {
+        return User.findById(1);
+    })
+    .then(user => {
+        if (!user) {
+            User.create({ name: 'Francis', email:'francispham89@gmail.com' });
+        }
+        return user;
+    })
+    .then(user => {
+        console.log(user);
         app.listen(3000);
     })
     .catch(err => {
