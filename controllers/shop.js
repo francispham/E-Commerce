@@ -138,6 +138,7 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
+    /* Before Sequelize:
     Cart.getCart(cart =>{
         Product.fetchAll(products => {
             const cartProducts = [];
@@ -154,6 +155,23 @@ exports.getCart = (req, res, next) => {
             });
         });
     });
+    */
+    console.log(req.user.cart);
+    req.user
+        .getCart()
+        .then(cart => {
+            // console.log(cart);
+            // Magic Sequelize Method is here
+            return cart.getProducts()
+                .then(products => {
+                    res.render('shop/cart', {
+                        path: '/cart',
+                        pageTitle: 'Your Cart',
+                        products: products
+                    });
+                });
+        })
+        .catch(err => console.log(err));
 };
 
 exports.postCart = (req, res, next) => {

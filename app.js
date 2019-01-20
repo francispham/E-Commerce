@@ -110,7 +110,8 @@ sequelize
         app.listen(3000);
     })
     */
-    .sync({ force: true })
+    // .sync({ force: true })
+    .sync()
     .then(result => {
         return User.findById(1);
     })
@@ -122,6 +123,9 @@ sequelize
     })
     .then(user => {
         console.log(user);
+        return user.createCart();
+    })
+    .then(cart => {
         app.listen(3000);
     })
     .catch(err => {
