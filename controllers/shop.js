@@ -224,7 +224,6 @@ exports.postCartDeleteProduct = (req, res, next) => {
         res.redirect('/cart');
     })
     */
-
     req.user
         .getCart()
         .then(cart => {
