@@ -239,6 +239,8 @@ exports.postCartDeleteProduct = (req, res, next) => {
         .catch(err => console.log(err));
 };
 
+exports.postOrder = (req, res, next) => {};
+
 exports.getOrders = (req, res, next) => {
     res.render('shop/orders', {
         path: '/orders',
