@@ -1,19 +1,30 @@
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 
+let _db; //this is a local variable. 
 const mongoConnect = callback => {
     MongoClient.connect(
         'mongodb+srv://francispham:Heroman1989@nodebasic-4blxc.mongodb.net/test?retryWrites=true',
         {
             useNewUrlParser: true
         })
-        .then(result => {
+        .then(client => {
             console.log('Connected!');
-            callback(result);
+            _db = client.db();
+            callback();
         })
         .catch(err => {
             console.log(err);
+            throw err;
         });
 };
 
-module.exports = mongoConnect;
+const getDb = () => {
+    if (_db) {
+        return _db;
+    }
+    throw "No database found!"
+}
+
+exports.mongoConnect = mongoConnect;
+exports.getDb = getDb;
