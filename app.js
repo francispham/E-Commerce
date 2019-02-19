@@ -2,7 +2,6 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-// const expressHbs = require('express-handlebars');
 
 // Add Error Controller:
 const errorController = require('./controllers/error');
@@ -21,7 +20,7 @@ app.set('views', 'views');
 
 
 // Add Controller:
-// const adminRoutes = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
 // const shopRoutes = require('./routes/shop');
 ``
 // For Serving Files Statically (eg public folder): 
@@ -35,9 +34,11 @@ app.use((req, res, next) => {
 });
 
 // Add Middleware for Retrieving User:
-app.use((req, res, next) => {});
+app.use((req, res, next) => {
+    next(); 
+});
 
-// app.use('/admin', adminRoutes);
+app.use('/admin', adminRoutes);
 // app.use(shopRoutes);
 
 app.use(errorController.get404);
