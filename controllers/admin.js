@@ -1,6 +1,6 @@
 const Product = require('../models/product');
 
-// For Render add-product.ejs:
+// For Render Add Product Page (edit-product.ejs):
 exports.getAddProduct = (req, res, next) => {
     res.render('admin/edit-product', {
         pageTitle: 'Add Product',
@@ -25,4 +25,17 @@ exports.postAddProduct = (req, res, next) => {
         .catch(err => {
             console.log(err);
         });     
+};
+
+// For Render Product Admin Page:
+exports.getProducts = (req, res, next) => {
+    Product.fetchAll()
+        .then(products => {
+            res.render('admin/products', {
+                prods: products,
+                pageTitle: 'Admin Products',
+                path: '/admin/products'
+            });
+        })
+        .catch(err => console.log(err));
 };

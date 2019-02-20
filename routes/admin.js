@@ -7,9 +7,6 @@ const adminController = require('../controllers/admin');
 // const products = []; 
 
 const router = express.Router();
-
-
-
 /* 
 // Because using app.use('/admin', adminRoutes) in app.js. These 2 routes will be come:
 // When (req,res, next) => () got moved to product.js:
@@ -29,7 +26,7 @@ router.get('/add-product', (req, res, next) => {
 router.get('/add-product', adminController.getAddProduct);
 
 // /admin/products => GET
-// router.get('/products', adminController.getProducts);
+router.get('/products', adminController.getProducts);
 
 /*
 // /admin/add-product => POST
