@@ -5,12 +5,12 @@ let _db; //this is a local variable.
 
 const mongoConnect = callback => {
     MongoClient.connect(
-        'mongodb+srv://francispham:Heroman1989@nodebasic-4blxc.mongodb.net/test?retryWrites=true',
+        'mongodb+srv://francispham:Heroman1989@nodebasic-4blxc.mongodb.net/shop?retryWrites=true',
         {
             useNewUrlParser: true
         })
         .then(client => {
-            console.log('Connected!');
+            console.log('MongoDB Connected!');
             _db = client.db();
             callback();
         })

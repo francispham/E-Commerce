@@ -1,6 +1,6 @@
 const getDb = require('../util/database').getDb;   
 class Product {
-    construction(title, price, description, imageUrl) {
+    constructor(title, price, description, imageUrl) {
         this.title = title;
         this.price = price;
         this.description = description;
