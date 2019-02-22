@@ -6,7 +6,7 @@ class Product {
         this.price = price;
         this.description = description;
         this.imageUrl = imageUrl;
-        this._id = new mongodb.ObjectId(id);
+        this._id = id ? new mongodb.ObjectId(id) : null;
     }
 
     save() {
@@ -16,6 +16,7 @@ class Product {
             // Update the product
             dbOp = db.collection('products').updateOne({ _id: this._id }, { $set: this });
         } else {
+            // Store new product
             dbOp = db.collection('products').insertOne(this);
         }
         return dbOp
@@ -57,7 +58,7 @@ class Product {
 
     static deleteById(prodId) {
         const db = getDb();
-        db.collection('products')
+        return db.collection('products')
             .deleteOne({ _id: new mongodb.ObjectId(prodId) })
             .then(result => {
                 console.log('Deleted');
