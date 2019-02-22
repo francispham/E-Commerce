@@ -9,6 +9,8 @@ const errorController = require('./controllers/error');
 // Add MongoDB Database:
 const mongoConnect = require('./util/database').mongoConnect;
 
+// Add Model:
+const User = require('./models/user');
 
 const app = express();
 
@@ -35,7 +37,13 @@ app.use((req, res, next) => {
 
 // Add Middleware for Retrieving User:
 app.use((req, res, next) => {
-    next(); 
+    User.findById('5c6f955d1c9d4400005f5f9b')
+        .then(user => {
+            req.user = user;
+            next(); 
+        })
+        .catch(err => console.log(err));
+    next();
 });
 
 app.use('/admin', adminRoutes);
