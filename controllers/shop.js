@@ -60,6 +60,14 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
     const prodId = req.body.productId;
+    Product.findById(prodId)
+        .then(product => {
+            return req.user.addToCart(product);
+        })
+        .then(result => {
+            console.log(result);
+        });
+    /* For Later:
     let fetchedCart;
     let newQuantity = 1;
     req.user
@@ -95,6 +103,7 @@ exports.postCart = (req, res, next) => {
             res.redirect('/cart');
         })
         .catch(err => console.log(err));
+    */    
 };
 
 exports.postCartDeleteProduct = (req, res, next) => {
