@@ -7,7 +7,7 @@ class User {
     constructor(username, email, cart, id) {
         this.name = username;
         this.email = email;
-        this.cart = cart; // {[{ ...tems: [, quantity: 1 }] }
+        this.cart = cart; // {[{ ...items: [, quantity: 1 }] }
         this._id = id;
     }
 

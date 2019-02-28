@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 
 // Add Middleware for Retrieving User:
 app.use((req, res, next) => {
-    User.findById('5c6f955d1c9d4400005f5f9b')
+    User.findById('5c7744f8e3cdd40cc13bca4a')
         .then(user => {
             req.user = new User(user.name, user.email, user.cart, user._id);
             next(); 
